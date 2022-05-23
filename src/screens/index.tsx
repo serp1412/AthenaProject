@@ -1,1 +1,1 @@
-export {default as FormScreen} from './FormScreen';
+export {default as FormScreen, FormScreenNavOptions} from './FormScreen';
