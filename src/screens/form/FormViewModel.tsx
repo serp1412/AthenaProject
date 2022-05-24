@@ -1,6 +1,4 @@
 
-import React from "react";
-
 class FormViewModel {
     validatePropertyValue(propertyValue: number | undefined): string | undefined {
         if (!propertyValue) {
@@ -38,6 +36,10 @@ class FormViewModel {
         if (borrowAmount > propertyValue) {
             return 'Borrow amount should be smaller than the property value'
         }
+    }
+
+    calculateLVR(propertyValue: number, borrowAmount: number): number {
+        return (borrowAmount / propertyValue) * 100
     }
 }
 

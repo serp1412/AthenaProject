@@ -15,11 +15,8 @@ import SvgUri from 'react-native-svg-uri';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FormViewModel from "./FormViewModel";
 import NumberFormat from "react-number-format";
-// import { Icon } from "../components/Icon";
-// import images from "../constants/images";
-// import common from "../styles/common";
 
-const FormScreen = () => {
+const FormScreen = ({ navigation }) => {
     const propertyValueRef = useRef<InputOutline>(null);
     const borrowRef = useRef<InputOutline>(null);
     const [propertyValue, setPropertyValue] = useState<string | undefined>(undefined)
@@ -40,30 +37,31 @@ const FormScreen = () => {
     }, [])
 
     const calculate = useCallback(() => {
-        setPropertyError(viewModel.validatePropertyValue(propertyNumber))
-        setBorrowError(viewModel.validateBorrowAmount(borrowNumber))
+        const propertyError = viewModel.validatePropertyValue(propertyNumber)
+        const borrowError = viewModel.validateBorrowAmount(borrowNumber)
+        setPropertyError(propertyError)
+        setBorrowError(borrowError)
         if (propertyError || borrowError) {
             return
         }
 
         if (propertyNumber && borrowNumber) {
-            setTopError(viewModel.validateResult(propertyNumber, borrowNumber))
-            if (topError) {
+            const error = viewModel.validateResult(propertyNumber, borrowNumber)
+            setTopError(error)
+            if (error) {
                 return
             }
+
+            const lvr = viewModel.calculateLVR(propertyNumber, borrowNumber)
+
+            navigation.navigate('Result', { lvr: lvr });
         }
 
-        console.log(' SUCCESSS ===== >');
-
-        // TODO: navigate to result
     }, [propertyNumber,
         borrowNumber,
         setPropertyError,
         setBorrowError,
-        setTopError,
-        propertyError,
-        borrowError,
-        topError])
+        setTopError])
 
     return (
         <View style={styles.main}>
@@ -105,7 +103,6 @@ const FormScreen = () => {
                                 blurOnSubmit={false}
                                 error={propertyError}
                                 onChangeText={setPropertyValue}
-                            //   onBlur={onBlur}
                             />
                         )} />
                     <Spacer orientation={'vertical'} space={25} />
@@ -129,7 +126,6 @@ const FormScreen = () => {
                                 blurOnSubmit={false}
                                 error={borrowError}
                                 onChangeText={setBorrowAmount}
-                            //   onBlur={onBlur}
                             />
                         )} />
                     <Spacer orientation={'vertical'} space={50} />

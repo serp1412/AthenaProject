@@ -8,7 +8,9 @@ import {
 // import LaunchScreen from './app/screens/LaunchScreen';
 import {
   FormScreen,
-  FormScreenNavOptions
+  FormScreenNavOptions,
+  ResultScreen,
+  ResultScreenNavOptions
 } from './screens';
 
 const Stack = createStackNavigator();
@@ -19,6 +21,11 @@ const MainStack = () => (
       name="Form"
       component={FormScreen}
       options={FormScreenNavOptions}
+    />
+    <Stack.Screen
+      name="Result"
+      component={ResultScreen}
+      options={ResultScreenNavOptions}
     />
   </Stack.Navigator>
 );
