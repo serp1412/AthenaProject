@@ -3,9 +3,6 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-// import {useRecoilValue} from 'recoil';
-// import {navRootState} from '../atoms/navigation';
-// import LaunchScreen from './app/screens/LaunchScreen';
 import {
   FormScreen,
   FormScreenNavOptions,
@@ -37,7 +34,6 @@ export const AppNavigator = () => {
 
   return (
     <Stack.Navigator
-    //   mode="modal"
       screenOptions={{
         cardStyle: {
           backgroundColor: 'rgba(0,0,0,0.5)',
