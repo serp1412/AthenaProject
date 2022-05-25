@@ -1,6 +1,5 @@
 import React, {useMemo} from 'react';
 import {
-  CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
 import {
@@ -33,14 +32,7 @@ export const AppNavigator = () => {
   }, []);
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        cardStyle: {
-          backgroundColor: 'rgba(0,0,0,0.5)',
-        },
-        gestureEnabled: false,
-        cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
-      }}>
+    <Stack.Navigator>
       <Stack.Screen
         name="Main"
         component={screenStack}

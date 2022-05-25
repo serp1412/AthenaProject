@@ -1,40 +1,56 @@
 
+export enum PropertyError {
+    Required = 'Required field',
+    BelowMin = 'Property value should be bigger than $100,000',
+    AboveMax = 'Property value should be smaller than $2,500,000'
+}
+
+export enum BorrowError {
+    Required = 'Required field',
+    BelowMin = 'Property value should be bigger than $80,000',
+    AboveMax = 'Property value should be smaller than $2,000,000'
+}
+
+export enum TopError {
+    BorrowTooHigh = 'Borrow amount should be smaller than the property value'
+}
+
 class FormViewModel {
-    validatePropertyValue(propertyValue: number | undefined): string | undefined {
+    validatePropertyValue(propertyValue: number | undefined): PropertyError | undefined {
         if (!propertyValue) {
-            return 'Required field'
+            return PropertyError.Required
         }
 
         if (propertyValue < 100000) {
-            return 'Property value should be bigger than $100,000'
+            return PropertyError.BelowMin
         }
 
         if (propertyValue > 2500000) {
-            return 'Property value should be smaller than $2,500,000'
+            return PropertyError.AboveMax
         }
 
         return undefined
     }
     
-    validateBorrowAmount(borrowAmount: number | undefined): string | undefined {
+    validateBorrowAmount(borrowAmount: number | undefined): BorrowError | undefined {
         if (!borrowAmount) {
-            return 'Required field'
+            return BorrowError.Required
         }
 
         if (borrowAmount < 80000) {
-            return 'Borrow amount should be bigger than $80,000'
+            return BorrowError.BelowMin
         }
 
         if (borrowAmount > 2000000) {
-            return 'Borrow amount value should be smaller than $2,000,000'
+            return BorrowError.AboveMax
         }
 
         return undefined
     }
 
-    validateResult(propertyValue: number, borrowAmount: number): string | undefined {
+    validateResult(propertyValue: number, borrowAmount: number): TopError | undefined {
         if (borrowAmount > propertyValue) {
-            return 'Borrow amount should be smaller than the property value'
+            return TopError.BorrowTooHigh
         }
     }
 
