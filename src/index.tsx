@@ -1,12 +1,10 @@
 import React, {useMemo} from 'react';
-import {
-  createStackNavigator,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   FormScreen,
   FormScreenNavOptions,
   ResultScreen,
-  ResultScreenNavOptions
+  ResultScreenNavOptions,
 } from './screens';
 
 const Stack = createStackNavigator();
